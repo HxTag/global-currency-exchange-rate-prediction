@@ -1,0 +1,197 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1050" viewBox="0 0 1500 1050">
+  <defs>
+    <style>
+      .bg { fill: #f7f9fc; }
+      .title { font-family: Arial, sans-serif; font-size: 32px; font-weight: 700; fill: #17365d; }
+      .entity { fill: #ffffff; stroke: #1f4e79; stroke-width: 2.5; }
+      .header { fill: #d9eaf7; stroke: #1f4e79; stroke-width: 2.5; }
+      .external { fill: #fff6e8; stroke: #c77700; stroke-width: 2.5; }
+      .external-header { fill: #ffe6bf; stroke: #c77700; stroke-width: 2.5; }
+      .derived { fill: #eaf7ef; stroke: #2e7d32; stroke-width: 2.5; }
+      .derived-header { fill: #d8f0df; stroke: #2e7d32; stroke-width: 2.5; }
+      .ename { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #111827; }
+      .attr { font-family: Arial, sans-serif; font-size: 16px; fill: #1f2937; }
+      .pk { font-family: Arial, sans-serif; font-size: 16px; font-weight: 700; fill: #111827; }
+      .fk { font-family: Arial, sans-serif; font-size: 16px; fill: #1f4e79; }
+      .line { stroke: #334155; stroke-width: 2.2; fill: none; }
+      .rel { font-family: Arial, sans-serif; font-size: 15px; font-weight: 700; fill: #334155; }
+      .small { font-family: Arial, sans-serif; font-size: 14px; fill: #475569; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1500" height="1050"/>
+  <text class="title" x="750" y="55" text-anchor="middle">ER Diagram - Currency Exchange Rate Prediction System</text>
+
+  <!-- Currency -->
+  <g>
+    <rect class="entity" x="85" y="125" width="320" height="230" rx="8"/>
+    <rect class="header" x="85" y="125" width="320" height="48" rx="8"/>
+    <text class="ename" x="245" y="156" text-anchor="middle">Currency</text>
+    <text class="pk" x="110" y="202">PK currency_code</text>
+    <text class="attr" x="110" y="232">currency_name</text>
+    <text class="attr" x="110" y="262">country</text>
+    <text class="attr" x="110" y="292">symbol</text>
+    <text class="attr" x="110" y="322">base_currency</text>
+  </g>
+
+  <!-- Raw Exchange Rate -->
+  <g>
+    <rect class="entity" x="540" y="115" width="360" height="260" rx="8"/>
+    <rect class="header" x="540" y="115" width="360" height="48" rx="8"/>
+    <text class="ename" x="720" y="146" text-anchor="middle">RawExchangeRate</text>
+    <text class="pk" x="565" y="193">PK raw_rate_id</text>
+    <text class="fk" x="565" y="223">FK currency_code</text>
+    <text class="attr" x="565" y="253">rate_date</text>
+    <text class="attr" x="565" y="283">exchange_rate</text>
+    <text class="attr" x="565" y="313">source_name</text>
+    <text class="attr" x="565" y="343">created_at</text>
+  </g>
+
+  <!-- Processed Feature -->
+  <g>
+    <rect class="derived" x="1040" y="105" width="380" height="320" rx="8"/>
+    <rect class="derived-header" x="1040" y="105" width="380" height="48" rx="8"/>
+    <text class="ename" x="1230" y="136" text-anchor="middle">ProcessedFeature</text>
+    <text class="pk" x="1065" y="183">PK feature_id</text>
+    <text class="fk" x="1065" y="213">FK currency_code</text>
+    <text class="attr" x="1065" y="243">feature_date</text>
+    <text class="attr" x="1065" y="273">lag1, lag2, lag3, lag7, lag14</text>
+    <text class="attr" x="1065" y="303">ma7, ma14</text>
+    <text class="attr" x="1065" y="333">return1, return7</text>
+    <text class="attr" x="1065" y="363">momentum7, volatility7</text>
+    <text class="attr" x="1065" y="393">day_of_week, month, year</text>
+  </g>
+
+  <!-- Model -->
+  <g>
+    <rect class="entity" x="85" y="490" width="350" height="290" rx="8"/>
+    <rect class="header" x="85" y="490" width="350" height="48" rx="8"/>
+    <text class="ename" x="260" y="521" text-anchor="middle">TrainedModel</text>
+    <text class="pk" x="110" y="568">PK model_id</text>
+    <text class="fk" x="110" y="598">FK currency_code</text>
+    <text class="attr" x="110" y="628">model_name</text>
+    <text class="attr" x="110" y="658">model_type</text>
+    <text class="attr" x="110" y="688">model_file_path</text>
+    <text class="attr" x="110" y="718">trained_on</text>
+    <text class="attr" x="110" y="748">is_main_model</text>
+  </g>
+
+  <!-- Metrics -->
+  <g>
+    <rect class="entity" x="560" y="510" width="340" height="250" rx="8"/>
+    <rect class="header" x="560" y="510" width="340" height="48" rx="8"/>
+    <text class="ename" x="730" y="541" text-anchor="middle">ModelMetric</text>
+    <text class="pk" x="585" y="588">PK metric_id</text>
+    <text class="fk" x="585" y="618">FK model_id</text>
+    <text class="fk" x="585" y="648">FK currency_code</text>
+    <text class="attr" x="585" y="678">mae</text>
+    <text class="attr" x="585" y="708">rmse</text>
+    <text class="attr" x="585" y="738">mape</text>
+  </g>
+
+  <!-- Forecast Request -->
+  <g>
+    <rect class="entity" x="1035" y="505" width="380" height="280" rx="8"/>
+    <rect class="header" x="1035" y="505" width="380" height="48" rx="8"/>
+    <text class="ename" x="1225" y="536" text-anchor="middle">ForecastRequest</text>
+    <text class="pk" x="1060" y="583">PK request_id</text>
+    <text class="fk" x="1060" y="613">FK currency_code</text>
+    <text class="fk" x="1060" y="643">FK model_id</text>
+    <text class="attr" x="1060" y="673">forecast_days</text>
+    <text class="attr" x="1060" y="703">request_source</text>
+    <text class="attr" x="1060" y="733">request_time</text>
+    <text class="attr" x="1060" y="763">status</text>
+  </g>
+
+  <!-- Forecast Result -->
+  <g>
+    <rect class="derived" x="585" y="840" width="370" height="190" rx="8"/>
+    <rect class="derived-header" x="585" y="840" width="370" height="48" rx="8"/>
+    <text class="ename" x="770" y="871" text-anchor="middle">ForecastResult</text>
+    <text class="pk" x="610" y="918">PK result_id</text>
+    <text class="fk" x="610" y="948">FK request_id</text>
+    <text class="attr" x="610" y="978">forecast_date</text>
+    <text class="attr" x="610" y="1008">predicted_exchange_rate</text>
+  </g>
+
+  <!-- Live Conversion -->
+  <g>
+    <rect class="external" x="90" y="850" width="370" height="180" rx="8"/>
+    <rect class="external-header" x="90" y="850" width="370" height="48" rx="8"/>
+    <text class="ename" x="275" y="881" text-anchor="middle">CurrencyConversion</text>
+    <text class="pk" x="115" y="928">PK conversion_id</text>
+    <text class="fk" x="115" y="958">FK from_currency_code</text>
+    <text class="fk" x="115" y="988">FK to_currency_code</text>
+    <text class="attr" x="115" y="1018">amount, converted_amount, live_rate</text>
+  </g>
+
+  <!-- External Provider -->
+  <g>
+    <rect class="external" x="1060" y="860" width="330" height="170" rx="8"/>
+    <rect class="external-header" x="1060" y="860" width="330" height="48" rx="8"/>
+    <text class="ename" x="1225" y="891" text-anchor="middle">ExchangeRateProvider</text>
+    <text class="pk" x="1085" y="938">PK provider_id</text>
+    <text class="attr" x="1085" y="968">provider_name</text>
+    <text class="attr" x="1085" y="998">api_endpoint</text>
+  </g>
+
+  <!-- Relationships -->
+  <line class="line" x1="405" y1="235" x2="540" y2="235"/>
+  <text class="rel" x="472" y="218" text-anchor="middle">1</text>
+  <text class="rel" x="510" y="218" text-anchor="middle">M</text>
+  <text class="small" x="472" y="258" text-anchor="middle">has raw rates</text>
+
+  <path class="line" d="M900 245 L1040 245"/>
+  <text class="rel" x="930" y="228" text-anchor="middle">1</text>
+  <text class="rel" x="1012" y="228" text-anchor="middle">M</text>
+  <text class="small" x="970" y="268" text-anchor="middle">processed into</text>
+
+  <path class="line" d="M245 355 L260 490"/>
+  <text class="rel" x="235" y="385">1</text>
+  <text class="rel" x="273" y="465">M</text>
+  <text class="small" x="310" y="425">has models</text>
+
+  <path class="line" d="M435 635 L560 635"/>
+  <text class="rel" x="462" y="618">1</text>
+  <text class="rel" x="532" y="618">M</text>
+  <text class="small" x="498" y="660" text-anchor="middle">evaluated by</text>
+
+  <path class="line" d="M900 635 L1035 635"/>
+  <text class="rel" x="928" y="618">1</text>
+  <text class="rel" x="1008" y="618">M</text>
+  <text class="small" x="968" y="660" text-anchor="middle">used in request</text>
+
+  <path class="line" d="M1225 785 L955 900"/>
+  <text class="rel" x="1190" y="810">1</text>
+  <text class="rel" x="980" y="888">M</text>
+  <text class="small" x="1090" y="865" text-anchor="middle">produces results</text>
+
+  <path class="line" d="M405 310 C700 450, 900 455, 1035 610"/>
+  <text class="rel" x="485" y="335">1</text>
+  <text class="rel" x="1010" y="590">M</text>
+  <text class="small" x="760" y="455" text-anchor="middle">requested for currency</text>
+
+  <path class="line" d="M245 780 L275 850"/>
+  <text class="rel" x="235" y="805">1</text>
+  <text class="rel" x="288" y="835">M</text>
+  <text class="small" x="340" y="820">from/to conversion</text>
+
+  <path class="line" d="M460 940 L585 940"/>
+  <text class="rel" x="487" y="923">1</text>
+  <text class="rel" x="558" y="923">M</text>
+  <text class="small" x="522" y="965" text-anchor="middle">creates</text>
+
+  <path class="line" d="M1060 945 L955 945"/>
+  <text class="rel" x="1032" y="928">1</text>
+  <text class="rel" x="982" y="928">M</text>
+  <text class="small" x="1008" y="970" text-anchor="middle">supplies rates</text>
+
+  <path class="line" d="M1230 425 L1225 505"/>
+  <text class="rel" x="1208" y="455">1</text>
+  <text class="rel" x="1238" y="485">M</text>
+  <text class="small" x="1300" y="468">features used for forecast</text>
+
+  <!-- Notes -->
+  <rect x="85" y="25" width="310" height="45" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text class="small" x="240" y="53" text-anchor="middle">Conceptual ERD based on CSV files, .pkl models, API, and dashboard outputs</text>
+</svg>

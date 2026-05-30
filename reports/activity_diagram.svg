@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1250" viewBox="0 0 1400 1250">
+  <defs>
+    <style>
+      .bg { fill: #f7f9fc; }
+      .title { font-family: Arial, sans-serif; font-size: 32px; font-weight: 700; fill: #17365d; }
+      .lane { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+      .lane-title { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #17365d; }
+      .action { fill: #eaf3ff; stroke: #2f75b5; stroke-width: 2.5; }
+      .ml { fill: #eaf7ef; stroke: #2e7d32; stroke-width: 2.5; }
+      .decision { fill: #fff4e5; stroke: #c77700; stroke-width: 2.5; }
+      .data { fill: #f4ecff; stroke: #6f42c1; stroke-width: 2.5; }
+      .text { font-family: Arial, sans-serif; font-size: 17px; fill: #1f2937; }
+      .small { font-family: Arial, sans-serif; font-size: 14px; fill: #475569; }
+      .line { stroke: #334155; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #64748b; stroke-width: 2; stroke-dasharray: 8 6; fill: none; marker-end: url(#arrow2); }
+      .startend { fill: #111827; stroke: #111827; stroke-width: 2; }
+      .endouter { fill: none; stroke: #111827; stroke-width: 3; }
+      .label { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; font-weight: 700; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1400" height="1250"/>
+  <text class="title" x="700" y="55" text-anchor="middle">Activity Diagram - Currency Exchange Rate Prediction System</text>
+
+  <!-- Swimlanes -->
+  <rect class="lane" x="70" y="95" width="300" height="1070" rx="12"/>
+  <rect class="lane" x="390" y="95" width="620" height="1070" rx="12"/>
+  <rect class="lane" x="1030" y="95" width="300" height="1070" rx="12"/>
+
+  <text class="lane-title" x="220" y="130" text-anchor="middle">User</text>
+  <text class="lane-title" x="700" y="130" text-anchor="middle">Prediction System</text>
+  <text class="lane-title" x="1180" y="130" text-anchor="middle">External API / Storage</text>
+
+  <!-- Start -->
+  <circle class="startend" cx="700" cy="170" r="16"/>
+
+  <!-- Training flow -->
+  <rect class="action" x="555" y="210" width="290" height="55" rx="18"/>
+  <text class="text" x="700" y="243" text-anchor="middle">Start Project Workflow</text>
+
+  <rect class="action" x="555" y="305" width="290" height="55" rx="18"/>
+  <text class="text" x="700" y="338" text-anchor="middle">Collect Historical Exchange Rates</text>
+
+  <path class="dash" d="M845 333 L1075 333"/>
+  <rect class="data" x="1075" y="305" width="210" height="55" rx="18"/>
+  <text class="text" x="1180" y="338" text-anchor="middle">Raw CSV Dataset</text>
+
+  <rect class="ml" x="555" y="400" width="290" height="55" rx="18"/>
+  <text class="text" x="700" y="433" text-anchor="middle">Preprocess and Clean Data</text>
+
+  <rect class="ml" x="525" y="495" width="350" height="65" rx="18"/>
+  <text class="text" x="700" y="522" text-anchor="middle">Create Time-Series Features</text>
+  <text class="small" x="700" y="546" text-anchor="middle">lags, moving averages, returns, volatility</text>
+
+  <rect class="data" x="1075" y="495" width="210" height="65" rx="18"/>
+  <text class="text" x="1180" y="522" text-anchor="middle">Processed Dataset</text>
+  <text class="small" x="1180" y="546" text-anchor="middle">processed_exchange_rates.csv</text>
+
+  <rect class="ml" x="555" y="600" width="290" height="55" rx="18"/>
+  <text class="text" x="700" y="633" text-anchor="middle">Split Data into Train and Test</text>
+
+  <rect class="ml" x="535" y="695" width="330" height="65" rx="18"/>
+  <text class="text" x="700" y="722" text-anchor="middle">Train Prediction Models</text>
+  <text class="small" x="700" y="746" text-anchor="middle">XGBoost and Random Forest</text>
+
+  <rect class="ml" x="555" y="800" width="290" height="65" rx="18"/>
+  <text class="text" x="700" y="827" text-anchor="middle">Evaluate Model Accuracy</text>
+  <text class="small" x="700" y="851" text-anchor="middle">MAE, RMSE, MAPE</text>
+
+  <rect class="data" x="1075" y="800" width="210" height="65" rx="18"/>
+  <text class="text" x="1180" y="827" text-anchor="middle">Model Metrics</text>
+  <text class="small" x="1180" y="851" text-anchor="middle">model_metrics.csv</text>
+
+  <rect class="data" x="1075" y="910" width="210" height="65" rx="18"/>
+  <text class="text" x="1180" y="937" text-anchor="middle">Saved Models</text>
+  <text class="small" x="1180" y="961" text-anchor="middle">.pkl files</text>
+
+  <rect class="ml" x="555" y="910" width="290" height="65" rx="18"/>
+  <text class="text" x="700" y="937" text-anchor="middle">Save Final Trained Models</text>
+  <text class="small" x="700" y="961" text-anchor="middle">for each selected currency</text>
+
+  <!-- User flow -->
+  <rect class="action" x="105" y="305" width="230" height="55" rx="18"/>
+  <text class="text" x="220" y="338" text-anchor="middle">Open Dashboard / API</text>
+
+  <rect class="action" x="105" y="400" width="230" height="55" rx="18"/>
+  <text class="text" x="220" y="433" text-anchor="middle">Select Currency</text>
+
+  <polygon class="decision" points="220,505 330,565 220,625 110,565"/>
+  <text class="text" x="220" y="560" text-anchor="middle">Choose</text>
+  <text class="text" x="220" y="582" text-anchor="middle">Operation?</text>
+
+  <rect class="action" x="105" y="680" width="230" height="65" rx="18"/>
+  <text class="text" x="220" y="707" text-anchor="middle">Set Forecast Days</text>
+  <text class="small" x="220" y="731" text-anchor="middle">1 to 30 business days</text>
+
+  <rect class="action" x="105" y="840" width="230" height="65" rx="18"/>
+  <text class="text" x="220" y="867" text-anchor="middle">View Forecast, Chart,</text>
+  <text class="text" x="220" y="891" text-anchor="middle">and Model Comparison</text>
+
+  <rect class="action" x="105" y="1010" width="230" height="55" rx="18"/>
+  <text class="text" x="220" y="1043" text-anchor="middle">Download Forecast CSV</text>
+
+  <rect class="action" x="105" y="555" width="230" height="55" rx="18"/>
+  <text class="text" x="220" y="588" text-anchor="middle">Enter Conversion Details</text>
+
+  <rect class="action" x="105" y="755" width="230" height="55" rx="18"/>
+  <text class="text" x="220" y="788" text-anchor="middle">View Converted Amount</text>
+
+  <!-- System forecast service -->
+  <rect class="action" x="555" y="680" width="290" height="65" rx="18"/>
+  <text class="text" x="700" y="707" text-anchor="middle">Load Selected Currency Model</text>
+  <text class="small" x="700" y="731" text-anchor="middle">from saved model files</text>
+
+  <rect class="action" x="555" y="1010" width="290" height="65" rx="18"/>
+  <text class="text" x="700" y="1037" text-anchor="middle">Generate Future Forecast</text>
+  <text class="small" x="700" y="1061" text-anchor="middle">iterative business-day prediction</text>
+
+  <rect class="action" x="555" y="1110" width="290" height="55" rx="18"/>
+  <text class="text" x="700" y="1143" text-anchor="middle">Return Prediction Results</text>
+
+  <rect class="action" x="555" y="555" width="290" height="55" rx="18"/>
+  <text class="text" x="700" y="588" text-anchor="middle">Fetch Latest Exchange Rate</text>
+
+  <rect class="data" x="1075" y="555" width="210" height="55" rx="18"/>
+  <text class="text" x="1180" y="588" text-anchor="middle">Live Rate Response</text>
+
+  <!-- Flow lines training -->
+  <path class="line" d="M700 186 L700 210"/>
+  <path class="line" d="M700 265 L700 305"/>
+  <path class="line" d="M700 360 L700 400"/>
+  <path class="line" d="M700 455 L700 495"/>
+  <path class="line" d="M700 560 L700 600"/>
+  <path class="line" d="M700 655 L700 680"/>
+  <path class="line" d="M700 760 L700 800"/>
+  <path class="line" d="M700 865 L700 910"/>
+  <path class="dash" d="M875 528 L1075 528"/>
+  <path class="dash" d="M845 833 L1075 833"/>
+  <path class="dash" d="M845 943 L1075 943"/>
+
+  <!-- Flow lines user -->
+  <path class="line" d="M335 333 L555 333"/>
+  <path class="line" d="M220 360 L220 400"/>
+  <path class="line" d="M220 455 L220 505"/>
+  <path class="line" d="M220 625 L220 680"/>
+  <text class="label" x="255" y="657">Forecast</text>
+  <path class="line" d="M335 713 L555 713"/>
+  <path class="line" d="M700 745 L700 1010"/>
+  <path class="dash" d="M845 1043 C980 1043, 1020 960, 1075 943"/>
+  <path class="line" d="M700 1075 L700 1110"/>
+  <path class="line" d="M555 1138 C430 1138, 350 960, 335 880"/>
+  <path class="line" d="M220 905 L220 1010"/>
+
+  <path class="line" d="M110 565 L105 565"/>
+  <path class="line" d="M220 610 L220 680"/>
+  <path class="line" d="M220 565 L220 555"/>
+  <text class="label" x="150" y="535">Convert</text>
+  <path class="line" d="M335 583 L555 583"/>
+  <path class="dash" d="M845 583 L1075 583"/>
+  <path class="line" d="M555 595 C420 645, 365 735, 335 783"/>
+
+  <!-- End -->
+  <circle class="endouter" cx="700" cy="1200" r="18"/>
+  <circle class="startend" cx="700" cy="1200" r="10"/>
+  <path class="line" d="M700 1165 L700 1182"/>
+  <path class="line" d="M220 1065 C310 1200, 565 1200, 682 1200"/>
+
+  <!-- Legend -->
+  <rect x="1030" y="1015" width="300" height="135" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect class="action" x="1055" y="1035" width="38" height="22" rx="8"/>
+  <text class="small" x="1110" y="1052">User/System activity</text>
+  <rect class="ml" x="1055" y="1065" width="38" height="22" rx="8"/>
+  <text class="small" x="1110" y="1082">ML processing activity</text>
+  <rect class="data" x="1055" y="1095" width="38" height="22" rx="8"/>
+  <text class="small" x="1110" y="1112">Stored data or result</text>
+  <polygon class="decision" points="1074,1125 1095,1138 1074,1150 1053,1138"/>
+  <text class="small" x="1110" y="1143">Decision point</text>
+</svg>

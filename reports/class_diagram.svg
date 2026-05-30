@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1050" viewBox="0 0 1500 1050">
+  <defs>
+    <style>
+      .bg { fill: #f7f9fc; }
+      .title { font-family: Arial, sans-serif; font-size: 32px; font-weight: 700; fill: #17365d; }
+      .classbox { fill: #ffffff; stroke: #1f4e79; stroke-width: 2.5; }
+      .header { fill: #d9eaf7; stroke: #1f4e79; stroke-width: 2.5; }
+      .service { fill: #eaf7ef; stroke: #2e7d32; stroke-width: 2.5; }
+      .service-header { fill: #d8f0df; stroke: #2e7d32; stroke-width: 2.5; }
+      .external { fill: #fff6e8; stroke: #c77700; stroke-width: 2.5; }
+      .external-header { fill: #ffe6bf; stroke: #c77700; stroke-width: 2.5; }
+      .classname { font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; fill: #111827; }
+      .text { font-family: Arial, sans-serif; font-size: 16px; fill: #1f2937; }
+      .small { font-family: Arial, sans-serif; font-size: 14px; fill: #475569; }
+      .line { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .dep { stroke: #64748b; stroke-width: 2; stroke-dasharray: 8 6; fill: none; marker-end: url(#arrow2); }
+      .assoc { stroke: #334155; stroke-width: 2; fill: none; }
+      .label { font-family: Arial, sans-serif; font-size: 14px; fill: #334155; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1500" height="1050"/>
+  <text class="title" x="750" y="55" text-anchor="middle">Class Diagram - Currency Exchange Rate Prediction System</text>
+
+  <!-- Data Collector -->
+  <g>
+    <rect class="classbox" x="70" y="120" width="330" height="200" rx="8"/>
+    <rect class="header" x="70" y="120" width="330" height="48" rx="8"/>
+    <text class="classname" x="235" y="151" text-anchor="middle">DataCollector</text>
+    <text class="text" x="90" y="196">- source_url</text>
+    <text class="text" x="90" y="224">- raw_data_path</text>
+    <line x1="70" y1="242" x2="400" y2="242" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text class="text" x="90" y="270">+ fetch_exchange_rates()</text>
+    <text class="text" x="90" y="298">+ save_raw_dataset()</text>
+  </g>
+
+  <!-- Preprocessor -->
+  <g>
+    <rect class="classbox" x="455" y="120" width="360" height="255" rx="8"/>
+    <rect class="header" x="455" y="120" width="360" height="48" rx="8"/>
+    <text class="classname" x="635" y="151" text-anchor="middle">DataPreprocessor</text>
+    <text class="text" x="475" y="196">- raw_data_path</text>
+    <text class="text" x="475" y="224">- processed_data_path</text>
+    <text class="text" x="475" y="252">- currencies</text>
+    <line x1="455" y1="270" x2="815" y2="270" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text class="text" x="475" y="298">+ clean_data()</text>
+    <text class="text" x="475" y="326">+ create_lag_features()</text>
+    <text class="text" x="475" y="354">+ save_processed_dataset()</text>
+  </g>
+
+  <!-- Feature Builder -->
+  <g>
+    <rect class="classbox" x="870" y="120" width="360" height="255" rx="8"/>
+    <rect class="header" x="870" y="120" width="360" height="48" rx="8"/>
+    <text class="classname" x="1050" y="151" text-anchor="middle">ForecastFeatureBuilder</text>
+    <text class="text" x="890" y="196">- history</text>
+    <text class="text" x="890" y="224">- forecast_date</text>
+    <text class="text" x="890" y="252">- feature_columns</text>
+    <line x1="870" y1="270" x2="1230" y2="270" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text class="text" x="890" y="298">+ build_lag_features()</text>
+    <text class="text" x="890" y="326">+ build_moving_averages()</text>
+    <text class="text" x="890" y="354">+ build_forecast_features()</text>
+  </g>
+
+  <!-- External API -->
+  <g>
+    <rect class="external" x="1265" y="120" width="190" height="170" rx="8"/>
+    <rect class="external-header" x="1265" y="120" width="190" height="48" rx="8"/>
+    <text class="classname" x="1360" y="151" text-anchor="middle">ExchangeRateAPI</text>
+    <text class="text" x="1285" y="196">- provider</text>
+    <text class="text" x="1285" y="224">- api_key</text>
+    <line x1="1265" y1="242" x2="1455" y2="242" stroke="#e5c07b" stroke-width="1.5"/>
+    <text class="text" x="1285" y="270">+ get_latest_rate()</text>
+  </g>
+
+  <!-- Model Trainer -->
+  <g>
+    <rect class="service" x="145" y="455" width="365" height="285" rx="8"/>
+    <rect class="service-header" x="145" y="455" width="365" height="48" rx="8"/>
+    <text class="classname" x="327" y="486" text-anchor="middle">ModelTrainer</text>
+    <text class="text" x="165" y="530">- processed_dataset</text>
+    <text class="text" x="165" y="558">- currencies</text>
+    <text class="text" x="165" y="586">- main_model: XGBoost</text>
+    <text class="text" x="165" y="614">- baseline_model: RandomForest</text>
+    <line x1="145" y1="632" x2="510" y2="632" stroke="#b7d7bf" stroke-width="1.5"/>
+    <text class="text" x="165" y="660">+ split_train_test()</text>
+    <text class="text" x="165" y="688">+ train_models()</text>
+    <text class="text" x="165" y="716">+ save_models()</text>
+  </g>
+
+  <!-- Model Evaluator -->
+  <g>
+    <rect class="service" x="575" y="455" width="350" height="255" rx="8"/>
+    <rect class="service-header" x="575" y="455" width="350" height="48" rx="8"/>
+    <text class="classname" x="750" y="486" text-anchor="middle">ModelEvaluator</text>
+    <text class="text" x="595" y="530">- y_test</text>
+    <text class="text" x="595" y="558">- predictions</text>
+    <text class="text" x="595" y="586">- metrics_path</text>
+    <line x1="575" y1="604" x2="925" y2="604" stroke="#b7d7bf" stroke-width="1.5"/>
+    <text class="text" x="595" y="632">+ calculate_mae()</text>
+    <text class="text" x="595" y="660">+ calculate_rmse()</text>
+    <text class="text" x="595" y="688">+ calculate_mape()</text>
+  </g>
+
+  <!-- Saved Model Repository -->
+  <g>
+    <rect class="classbox" x="1000" y="455" width="360" height="230" rx="8"/>
+    <rect class="header" x="1000" y="455" width="360" height="48" rx="8"/>
+    <text class="classname" x="1180" y="486" text-anchor="middle">ModelRepository</text>
+    <text class="text" x="1020" y="530">- models_dir</text>
+    <text class="text" x="1020" y="558">- model_files</text>
+    <text class="text" x="1020" y="586">- metrics_file</text>
+    <line x1="1000" y1="604" x2="1360" y2="604" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text class="text" x="1020" y="632">+ load_model(currency)</text>
+    <text class="text" x="1020" y="660">+ load_metrics()</text>
+  </g>
+
+  <!-- Streamlit Dashboard -->
+  <g>
+    <rect class="classbox" x="150" y="815" width="370" height="190" rx="8"/>
+    <rect class="header" x="150" y="815" width="370" height="48" rx="8"/>
+    <text class="classname" x="335" y="846" text-anchor="middle">StreamlitDashboard</text>
+    <text class="text" x="170" y="891">+ display_historical_trend()</text>
+    <text class="text" x="170" y="919">+ generate_forecast()</text>
+    <text class="text" x="170" y="947">+ compare_models()</text>
+    <text class="text" x="170" y="975">+ convert_currency()</text>
+  </g>
+
+  <!-- FastAPI -->
+  <g>
+    <rect class="classbox" x="585" y="815" width="340" height="160" rx="8"/>
+    <rect class="header" x="585" y="815" width="340" height="48" rx="8"/>
+    <text class="classname" x="755" y="846" text-anchor="middle">PredictionAPI</text>
+    <text class="text" x="605" y="891">+ home()</text>
+    <text class="text" x="605" y="919">+ predict(currency, days)</text>
+    <text class="text" x="605" y="947">+ validate_request()</text>
+  </g>
+
+  <!-- Forecast Result -->
+  <g>
+    <rect class="classbox" x="1010" y="800" width="330" height="190" rx="8"/>
+    <rect class="header" x="1010" y="800" width="330" height="48" rx="8"/>
+    <text class="classname" x="1175" y="831" text-anchor="middle">ForecastResult</text>
+    <text class="text" x="1030" y="876">- currency</text>
+    <text class="text" x="1030" y="904">- model_name</text>
+    <text class="text" x="1030" y="932">- forecast_date</text>
+    <text class="text" x="1030" y="960">- predicted_exchange_rate</text>
+  </g>
+
+  <!-- Relationships -->
+  <path class="line" d="M400 220 L455 220"/>
+  <text class="label" x="428" y="208" text-anchor="middle">raw data</text>
+
+  <path class="line" d="M635 375 L335 455"/>
+  <text class="label" x="470" y="425" text-anchor="middle">processed data</text>
+
+  <path class="line" d="M510 595 L575 595"/>
+  <text class="label" x="543" y="582" text-anchor="middle">predictions</text>
+
+  <path class="line" d="M925 595 L1000 595"/>
+  <text class="label" x="963" y="582" text-anchor="middle">metrics</text>
+
+  <path class="line" d="M510 650 L1000 650"/>
+  <text class="label" x="750" y="638" text-anchor="middle">saves trained models</text>
+
+  <path class="dep" d="M335 815 L1010 630"/>
+  <text class="label" x="650" y="725" text-anchor="middle">loads models and metrics</text>
+
+  <path class="dep" d="M755 815 L1040 685"/>
+  <text class="label" x="890" y="745" text-anchor="middle">loads model</text>
+
+  <path class="dep" d="M925 875 L1010 875"/>
+  <text class="label" x="967" y="860" text-anchor="middle">returns</text>
+
+  <path class="dep" d="M1000 560 L910 375"/>
+  <text class="label" x="938" y="465" text-anchor="middle">uses feature builder</text>
+
+  <path class="dep" d="M520 900 L1010 900"/>
+  <text class="label" x="755" y="885" text-anchor="middle">shows forecast result</text>
+
+  <path class="dep" d="M520 965 C900 1040, 1230 920, 1320 290"/>
+  <text class="label" x="1180" y="1020" text-anchor="middle">fetches live conversion rate</text>
+
+  <path class="dep" d="M1230 250 L1265 235"/>
+  <text class="label" x="1245" y="215" text-anchor="middle">live rate</text>
+
+  <path class="dep" d="M870 250 L815 250"/>
+  <text class="label" x="842" y="235" text-anchor="middle">feature set</text>
+
+  <!-- Legend -->
+  <rect x="70" y="900" width="260" height="105" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <rect class="header" x="90" y="920" width="38" height="20"/>
+  <text class="small" x="145" y="936">Project class/module</text>
+  <rect class="service-header" x="90" y="950" width="38" height="20"/>
+  <text class="small" x="145" y="966">ML processing class</text>
+  <line class="dep" x1="90" y1="987" x2="130" y2="987"/>
+  <text class="small" x="145" y="992">Dependency / usage</text>
+</svg>
