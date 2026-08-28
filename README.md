@@ -44,3 +44,7 @@ http://127.0.0.1:8000/predict/INR?days=7
 
 - Live exchange rates are fetched from Frankfurter. If the API is unavailable, the dashboard still shows forecasts from saved data.
 - Forecasts are educational and should not be treated as financial advice.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
